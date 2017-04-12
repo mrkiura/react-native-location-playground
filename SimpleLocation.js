@@ -32,15 +32,21 @@ export default class Geolocation extends Component {
         console.log(position);
         this.setState({initialPosition});
       },
-      (error) => alert(JSON.stringify(error)),
+    (error) => {
+      console.log(error.message);
+    },
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
      );
      this.watchId = navigator.geolocation.watchPosition((position) => {
        let lastPosition = JSON.stringify(position);
-        console.log('last position position')
+        console.log('last position');
         console.log(position);
         this.setState({lastPosition});
-     })
+     },
+    (error) => {
+      console.log(error.message);
+    },
+    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
   }
 
   componentWillUnmount() {
